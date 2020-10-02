@@ -1,12 +1,21 @@
-<?php
-    require_once("vendor/autoload.php");
+<?php 
+session_start();
+require_once("vendor/autoload.php");
 
-    $app = new \Slim\Slim();
+use \NanoChallenge\PageAdmin;
+use \Slim\Slim;
 
-    $app->get("/:name",function($name){
-        echo "<h1>Bem vindo, $name</h1>";
-    });
+$app = new Slim();
 
-    $app->run();
+$app->config('debug', true);
 
-?>
+$app->get('/admin', function() {
+
+	$page = new PageAdmin();
+
+    $page->setTpl("index");
+});
+
+$app->run();
+
+ ?>
